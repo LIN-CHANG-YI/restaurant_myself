@@ -28,6 +28,24 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name
+  const category = req.body.category
+  const image = req.body.image
+  const rating = req.body.rating
+  const location = req.body.rating
+  const phone = req.body.phone
+  const google_map = req.body.google_map
+  const description = req.body.description
+  return Restaurant.create({ name, category, image, rating, location, phone, google_map, description })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
