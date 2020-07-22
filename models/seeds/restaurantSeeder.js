@@ -12,4 +12,5 @@ db.once('open', () => {
   for (let i = 0; i < results.length; i++) {
     Restaurant.create(results[i])
   }
+  console.log('done!')
 })

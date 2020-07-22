@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 const restaurantSchema = new Schema({
   id: {
     type: Number,
-    // required: true
+    required: false
   },
   name: {
     type: String,
@@ -11,7 +11,7 @@ const restaurantSchema = new Schema({
   },
   name_en: {
     type: String,
-    // required: true
+    required: false
   },
   category: {
     type: String,
@@ -19,7 +19,8 @@ const restaurantSchema = new Schema({
   },
   image: {
     type: String,
-    required: true
+    default: "https://upload.cc/i1/2020/07/22/QU9vWD.png",
+    required: false
   },
   location: {
     type: String,
@@ -35,7 +36,9 @@ const restaurantSchema = new Schema({
   },
   rating: {
     type: Number,
-    required: true
+    required: true,
+    max: 5,
+    min: 1
   },
   description: {
     type: String,
