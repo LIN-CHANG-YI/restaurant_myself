@@ -46,14 +46,15 @@ app.get('/restaurants/new', (req, res) => {
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
   const category = req.body.category
-  const image = req.body.image
+  const image = req.body.image !== '' ? req.body.image : undefined
   const rating = req.body.rating
   const location = req.body.rating
   const phone = req.body.phone
   const google_map = req.body.google_map
   const description = req.body.description
-  const create = new Restaurant({ name, category, image, rating, location, phone, google_map, description })
-  return create.save()
+  return Restaurant.create({ name, category, image, rating, location, phone, google_map, description }, function (err, res) {
+    console.log(res)
+  })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
