@@ -1,38 +1,38 @@
 <div class="alert alert-dark text-center font-weight-bolder" style="font-size: larger;" role="alert">
   新增餐廳
 </div>
-<form action="/restaurants" method="POST" style="width: 50%; margin: auto">
+<form id="form" action="/restaurants" method="POST" style="width: 50%; margin: auto" required>
   <div class="form-group">
-    <label for="formGroupExampleInput">餐廳名稱</label>
-    <input type="text" class="form-control" name="name" id="formGroupExampleInput" placeholder="請填入餐廳名稱...">
+    <label for="name">餐廳名稱</label>
+    <input type="text" class="form-control" name="name" id="name" placeholder="請填入餐廳名稱...">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳分類</label>
-    <input type="text" class="form-control" name="category" id="formGroupExampleInput2" placeholder="請填入餐廳分類...">
+    <label for="category">餐廳分類</label>
+    <input type="text" class="form-control" name="category" id="category" placeholder="請填入餐廳分類..." required>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳圖片</label>
-    <input type="text" class="form-control" name="image" id="formGroupExampleInput2" placeholder="請填入餐廳圖片...">
+    <label for="image">餐廳圖片</label>
+    <input type="text" class="form-control" name="image" id="image" placeholder="請填入餐廳圖片...">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳電話</label>
-    <input type="text" class="form-control" name="phone" id="formGroupExampleInput2" placeholder="請填入餐廳電話...">
+    <label for="phone">餐廳電話</label>
+    <input type="text" class="form-control" name="phone" id="phone" placeholder="請填入餐廳電話..." required>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳地址</label>
-    <input type="text" class="form-control" name="location" id="formGroupExampleInput2" placeholder="請填入餐廳地址...">
+    <label for="location">餐廳地址</label>
+    <input type="text" class="form-control" name="location" id="location" placeholder="請填入餐廳地址..." required>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳地圖連結</label>
-    <input type="text" class="form-control" name="google_map" id="formGroupExampleInput2" placeholder="請填入餐廳地圖連結...">
+    <label for="google_map">餐廳地圖連結</label>
+    <input type="text" class="form-control" name="google_map" id="google_map" placeholder="請填入餐廳地圖連結..." required>
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳評價</label>
-    <input type="text" class="form-control" name="rating" id="formGroupExampleInput2" placeholder="請填入餐廳評價...">
+    <label for="rating">餐廳評價</label>
+    <input type="number" class="form-control" name="rating" id="rating" placeholder="請填入餐廳評價..." min="1" max="5">
   </div>
   <div class="form-group">
-    <label for="formGroupExampleInput2">餐廳介紹</label>
-    <input type="text" class="form-control" name="description" id="formGroupExampleInput2" placeholder="請填入餐廳介紹...">
+    <label for="description">餐廳介紹</label>
+    <input type="text" class="form-control" name="description" id="description" placeholder="請填入餐廳介紹..." required>
   </div>
   <button type="submit" class="btn btn-primary">送出表單</button>
 </form>

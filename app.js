@@ -30,12 +30,9 @@ app.get('/', (req, res) => {
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
-  return Restaurant.find()
+  return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' } })
     .lean()
-    .then(allRestaurants => {
-      const restaurants = allRestaurants.filter(restaurant => restaurant.name.toLowerCase().includes(keyword.toLowerCase()))
-      return res.render('index', { restaurants, keyword })
-    })
+    .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
 
@@ -52,9 +49,7 @@ app.post('/restaurants', (req, res) => {
   const phone = req.body.phone
   const google_map = req.body.google_map
   const description = req.body.description
-  return Restaurant.create({ name, category, image, rating, location, phone, google_map, description }, function (err, res) {
-    console.log(res)
-  })
+  return Restaurant.create({ name, category, image, rating, location, phone, google_map, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
