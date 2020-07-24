@@ -2,6 +2,8 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
+
 const Restaurant = require('./models/restaurant')
 const app = express()
 
@@ -9,6 +11,7 @@ app.engine('hbs', exphbs({ defaultLayout: 'main', extname: ".hbs" }))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 mongoose.connect("mongodb://localhost/restaurant_list", { useNewUrlParser: true, useUnifiedTopology: true })
 
 const db = mongoose.connection
@@ -64,7 +67,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const { name, category, rating, location, phone, google_map, description } = req.body
   const image = req.body.image !== '' ? req.body.image : "https://upload.cc/i1/2020/07/22/QU9vWD.png"
@@ -84,7 +87,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
