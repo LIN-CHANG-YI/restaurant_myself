@@ -1,29 +1,28 @@
-<div class="d-flex">
-  <!-- search bar -->
-  <div class="container search-bar">
-    <div class="search-bar-outer">
-      <div class="search-bar-inner">
-        <form action="/search">
-          <h4 class="mb-2">尋找餐廳：</h4>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <button class="btn dropdown-toggle selectName" type="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">{{#if selectName}}{{selectName}}{{else}}選擇{{/if}}</button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="/search/name">名稱</a>
-                <a class="dropdown-item" href="/search/category">類別</a>
-                <a class="dropdown-item" href="/search/location">地區</a>
-              </div>
+{{!-- <div class="d-flex"> --}}
+<!-- search bar -->
+<div class="container search-bar">
+  <div class="search-bar-outer">
+    <div class="search-bar-inner">
+      <form action="/search">
+        <h4 class="mb-2">尋找餐廳：</h4>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn dropdown-toggle selectName" type="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">{{#if selectName}}{{selectName}}{{else}}餐廳名稱{{/if}}</button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="/search/name">餐廳名稱</a>
+              <a class="dropdown-item" href="/search/category">餐廳類別</a>
+              <a class="dropdown-item" href="/search/location">餐廳地區</a>
             </div>
-            <input type="text" name="keyword" value="{{ keyword }}" class="form-control"
-              aria-label="Text input with dropdown button" placeholder="輸入餐廳、分類">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
-        </form>
-      </div>
+          <input type="text" name="keyword" value="{{ keyword }}" class="form-control"
+            aria-label="Text input with dropdown button" placeholder="輸入餐廳、分類">
+          <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="dropdown">
+  <div class="dropdown text-right mr-5">
     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
       aria-haspopup="true" aria-expanded="false">
       {{#if selectSort}}{{selectSort}}{{else}}排序{{/if}}
@@ -31,11 +30,15 @@
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="/sort/name/asc">A -> Z</a>
       <a class="dropdown-item" href="/sort/name/desc">Z -> A</a>
+      <a class="dropdown-item" href="/sort/category/asc">類別</a>
+      <a class="dropdown-item" href="/sort/location/asc">地區</a>
     </div>
   </div>
 </div>
+
+{{!-- </div> --}}
 <!-- restaurant list -->
-<div class="container mt-5">
+<div class="container mt-2">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">

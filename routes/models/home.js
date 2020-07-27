@@ -3,6 +3,8 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 router.get('/', (req, res) => {
+  //重新進入頁面清除cookie
+  res.clearCookie('option')
   return Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
