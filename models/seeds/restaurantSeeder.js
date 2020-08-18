@@ -97,34 +97,37 @@ const RESTAURANT_SEED = [
 ]
 
 db.once('open', () => {
-  function runSeed(user, index) {
-    bcrypt.genSalt(10)
-      .then(salt => bcrypt.hash(user.password, salt))
-      .then(hash => {
-        User.create({
-          name: user.name,
-          email: user.email,
-          password: hash
-        })
-          .then(user => {
-            const userId = user._id
-            Promise.all(Array.from(
-              { length: 3 },
-              (_, i) => Restaurant.create({
-                name: RESTAURANT_SEED[i + index].name,
-                name_en: RESTAURANT_SEED[i + index].name_en,
-                category: RESTAURANT_SEED[i + index].category,
-                image: RESTAURANT_SEED[i + index].image,
-                location: RESTAURANT_SEED[i + index].location,
-                phone: RESTAURANT_SEED[i + index].phone,
-                google_map: RESTAURANT_SEED[i + index].google_map,
-                rating: RESTAURANT_SEED[i + index].rating,
-                description: RESTAURANT_SEED[i + index].description,
-                userId
-              })
-            ))
+  const runSeed = (user, index) => {
+    return new Promise((resolve, reject) => {
+      bcrypt.genSalt(10)
+        .then(salt => bcrypt.hash(user.password, salt))
+        .then(hash => {
+          User.create({
+            name: user.name,
+            email: user.email,
+            password: hash
           })
-      })
+            .then(user => {
+              const userId = user._id
+              Promise.all(Array.from(
+                { length: 3 },
+                (_, i) => Restaurant.create({
+                  name: RESTAURANT_SEED[i + index].name,
+                  name_en: RESTAURANT_SEED[i + index].name_en,
+                  category: RESTAURANT_SEED[i + index].category,
+                  image: RESTAURANT_SEED[i + index].image,
+                  location: RESTAURANT_SEED[i + index].location,
+                  phone: RESTAURANT_SEED[i + index].phone,
+                  google_map: RESTAURANT_SEED[i + index].google_map,
+                  rating: RESTAURANT_SEED[i + index].rating,
+                  description: RESTAURANT_SEED[i + index].description,
+                  userId
+                })
+              ))
+              resolve()
+            })
+        })
+    })
   }
   User.find({ $or: [{ email: USER_SEED[0].email }, { email: USER_SEED[1].email }] })
     .then((user) => {
@@ -135,7 +138,7 @@ db.once('open', () => {
         Promise.all([runSeed(USER_SEED[0], 0), runSeed(USER_SEED[1], 3)])
           .then(() => {
             console.log('done')
-            // process.exit()
+            process.exit()
           })
       }
     })
