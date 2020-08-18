@@ -123,8 +123,7 @@ db.once('open', () => {
                   description: RESTAURANT_SEED[i + index].description,
                   userId
                 })
-              ))
-              resolve()
+              )).then(() => resolve())
             })
         })
     })
