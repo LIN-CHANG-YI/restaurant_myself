@@ -5,9 +5,10 @@ const cookieParser = require('cookie-parser') //載入cookie-parser
 router.use(cookieParser('hello'))
 
 router.get('/', (req, res) => {
+  const userId = req.user._id
   //重新進入頁面清除cookie
   res.clearCookie('option')
-  return Restaurant.find()
+  return Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
