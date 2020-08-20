@@ -26,7 +26,7 @@ router.get('/search', (req, res) => {
   if (!option) {
     option = `name`
   }
-  return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' }, userId })
+  return Restaurant.find({ [option]: { $regex: `${keyword}`, $options: 'i' }, userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword, selectName: selectName[option] }))
     .catch(error => console.log(error))
