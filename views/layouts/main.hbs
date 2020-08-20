@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Restaurant List</title>
 
-  <link rel="stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css">
+  <link rel="stylesheet" href="https://bootswatch.com/4/materia/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css"
     integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
   <link rel="stylesheet" href="/stylesheets/index.css">
@@ -16,7 +16,7 @@
 <body style="overflow-x: hidden">
   <header class="sticky-top">
     <!-- navigation -->
-    <nav class="navbar navbar-danger bg-danger">
+    <nav class="navbar navbar-warning bg-warning">
       <div class="container">
         <a class="navbar-brand" href="/">
           <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
@@ -25,9 +25,9 @@
         </a>
       </div>
       {{#if isAuthenticated}}
-      <a href="/users/logout" class="btn btn-success">Logout</a>
+      <a href="/users/logout" class="btn btn-secondary">Logout</a>
       {{else}}
-      <a href="/users/login" class="btn btn-success">Login</a>
+      <a href="/users/login" class="btn btn-secondary">Login</a>
       {{/if}}
     </nav>
   </header>
