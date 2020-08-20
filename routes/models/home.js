@@ -15,6 +15,7 @@ router.get('/', (req, res) => {
 })
 
 router.get('/search', (req, res) => {
+  const userId = req.user._id
   const selectName = {
     name: "餐廳名稱",
     category: '餐廳類別',
@@ -25,13 +26,14 @@ router.get('/search', (req, res) => {
   if (!option) {
     option = `name`
   }
-  return Restaurant.find({ [option]: { $regex: `${keyword}`, $options: 'i' } })
+  return Restaurant.find({ name: { $regex: `${keyword}`, $options: 'i' }, userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword, selectName: selectName[option] }))
     .catch(error => console.log(error))
 })
 
 router.get('/search/:options', (req, res) => {
+  const userId = req.user._id
   const options = req.params.options
   const selectName = {
     name: "餐廳名稱",
@@ -40,7 +42,7 @@ router.get('/search/:options', (req, res) => {
   }
   //設定cookie名稱、參數、屬性
   res.cookie('option', options, { httpOnly: true, signed: true })
-  return Restaurant.find()
+  return Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, selectName: selectName[`${options}`] }))
     .catch(error => console.log(error))
@@ -49,6 +51,7 @@ router.get('/search/:options', (req, res) => {
 router.get('/sort', (req, res) => {
   const keys = Object.keys(req.query)
   const values = Object.values(req.query)
+  const userId = req.user._id
   const selectName = {
     name: "餐廳名稱",
     category: '餐廳類別',
@@ -61,7 +64,7 @@ router.get('/sort', (req, res) => {
     locationasc: '地區'
   }
   const option = req.signedCookies.option
-  Restaurant.find()
+  Restaurant.find({ userId })
     .lean()
     .sort({ [keys]: values })
     .then(restaurants => res.render('index', { restaurants, selectSort: selectSort[keys + values], selectName: selectName[option] }))
