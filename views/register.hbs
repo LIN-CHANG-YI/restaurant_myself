@@ -1,8 +1,10 @@
 <div class="row" style="position: relative; top: -200px">
   <div class="col-md-6 m-auto">
     <div class="card card-body">
-      <h1 class="text-center mt-3">Register</h1>
-      {{> message}}
+      <h1 class="text-center mt-2">Register</h1>
+      <div id="messageBlock" style="height: 60px;">
+        {{> message}}
+      </div>
       <form action="/users/register" method="POST">
         <div class="form-group">
           <label for="name">Name</label>
