@@ -6,7 +6,6 @@ const methodOverride = require('method-override')
 const routes = require('./routes')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
-const { prependListener } = require('./models/user')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()

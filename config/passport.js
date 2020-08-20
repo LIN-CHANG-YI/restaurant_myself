@@ -13,16 +13,15 @@ module.exports = app => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          done(null, false, req.flash('login_msg', '請先註冊帳號'))
+          return done(null, false, req.flash('login_msg', '請先註冊帳號'))
         }
         return bcrypt.compare(password, user.password)
           .then(isMatch => {
             if (!isMatch) return done(null, false, req.flash('login_msg', '帳號或密碼錯誤'))
             return done(null, user)
           })
-          .catch(err => done(err, false))
       })
-      .catch(err => console.log(err))
+      .catch(err => done(err, false))
   }))
 
   passport.use(new FacebookStrategy({
