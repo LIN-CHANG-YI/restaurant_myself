@@ -1,6 +1,8 @@
 # 餐廳清單
 使用Node.js + Express + express-handlebars打造的餐廳美食平台，內有各國料理提供使用者多樣化的選擇，可以看到餐廳的評價與地址，還不快點打電話預約起來~
-# 網站功能
+# 網站功能(update 2020/8/20)
++ 註冊功能
++ 登入、登出功能(包含Facebook登入)
 + 點選餐廳可看到餐廳詳細資訊(類別、地址、電話、...)
 + 進入餐廳後點選餐廳地址旁的小icon可連結到google map得知餐廳位置
 + 點選畫面左上角我的餐廳清單即可回到首頁
@@ -10,7 +12,8 @@
 + 修改餐廳資料
 + 刪除餐廳資料
 # 專案畫面
-![](https://upload.cc/i1/2020/07/27/JA2Fzb.png)
+![](https://upload.cc/i1/2020/08/20/T9Gksu.png)
+![](https://upload.cc/i1/2020/08/20/08Qh3C.png)
 # 安裝方式
 1.打開 terminal 將專案 clone 到本地電腦
 ```
@@ -28,17 +31,21 @@ npm install
 ```
 npm install nodemon
 ```
-5.啟動程式
+5.匯入種子資料
+```
+npm run seed
+```
+6.啟動程式
 ```
 npm run start
 或
 npm run dev
 ```
-6.成功執行
+7.成功執行
 ```
 在 terminal 可以看到 Express is listening on localhost:3000
 ```
-7.開啟瀏覽器
+8.開啟瀏覽器
 ```
 網址列輸入localhost:3000
 ```
