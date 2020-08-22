@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
   const image = req.body.image !== '' ? req.body.image : undefined
   return Restaurant.create({ name, category, image, rating, location, phone, google_map, description, userId })
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.get('/:id', (req, res) => {
@@ -22,7 +22,7 @@ router.get('/:id', (req, res) => {
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -31,7 +31,7 @@ router.get('/:id/edit', (req, res) => {
   return Restaurant.findOne({ _id, userId })
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.put('/:id', (req, res) => {
@@ -52,7 +52,7 @@ router.put('/:id', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${_id}`))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.delete('/:id', (req, res) => {
@@ -61,7 +61,7 @@ router.delete('/:id', (req, res) => {
   return Restaurant.findOne({ _id, userId })
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 module.exports = router

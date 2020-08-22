@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
   return Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.get('/search', (req, res) => {
@@ -29,7 +29,7 @@ router.get('/search', (req, res) => {
   return Restaurant.find({ [option]: { $regex: `${keyword}`, $options: 'i' }, userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword, selectName: selectName[option] }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.get('/search/:options', (req, res) => {
@@ -40,7 +40,7 @@ router.get('/search/:options', (req, res) => {
   return Restaurant.find({ userId })
     .lean()
     .then(restaurants => res.render('index', { restaurants, selectName: selectName[`${options}`] }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 router.get('/sort', (req, res) => {
@@ -58,7 +58,7 @@ router.get('/sort', (req, res) => {
     .lean()
     .sort({ [keys]: values })
     .then(restaurants => res.render('index', { restaurants, selectSort: selectSort[keys + values], selectName: selectName[option] }))
-    .catch(error => console.log(error))
+    .catch(error => res.render('error'))
 })
 
 module.exports = router
