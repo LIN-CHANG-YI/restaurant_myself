@@ -3,6 +3,11 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 const cookieParser = require('cookie-parser') //載入cookie-parser
 router.use(cookieParser('hello'))
+const selectName = {
+  name: "餐廳名稱",
+  category: '餐廳類別',
+  location: '餐廳地區'
+}
 
 router.get('/', (req, res) => {
   const userId = req.user._id
@@ -16,11 +21,6 @@ router.get('/', (req, res) => {
 
 router.get('/search', (req, res) => {
   const userId = req.user._id
-  const selectName = {
-    name: "餐廳名稱",
-    category: '餐廳類別',
-    location: '餐廳地區'
-  }
   const keyword = req.query.keyword
   let option = req.signedCookies.option
   if (!option) {
@@ -35,11 +35,6 @@ router.get('/search', (req, res) => {
 router.get('/search/:options', (req, res) => {
   const userId = req.user._id
   const options = req.params.options
-  const selectName = {
-    name: "餐廳名稱",
-    category: '餐廳類別',
-    location: '餐廳地區'
-  }
   //設定cookie名稱、參數、屬性
   res.cookie('option', options, { httpOnly: true, signed: true })
   return Restaurant.find({ userId })
@@ -52,11 +47,6 @@ router.get('/sort', (req, res) => {
   const keys = Object.keys(req.query)
   const values = Object.values(req.query)
   const userId = req.user._id
-  const selectName = {
-    name: "餐廳名稱",
-    category: '餐廳類別',
-    location: '餐廳地區'
-  }
   const selectSort = {
     nameasc: 'A -> Z',
     namedesc: 'Z -> A',
