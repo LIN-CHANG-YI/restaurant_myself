@@ -56,7 +56,7 @@ router.get('/sort', (req, res) => {
   const option = req.signedCookies.option
   Restaurant.find({ userId })
     .lean()
-    .sort({ [keys]: values })
+    .sort({ [keys[0]]: values[0] })
     .then(restaurants => res.render('index', { restaurants, selectSort: selectSort[keys + values], selectName: selectName[option] }))
     .catch(error => res.render('error'))
 })
